@@ -1,0 +1,18 @@
+{
+  "leaf_blight": {
+    "suggestion": "Apply copper fungicide every 7 days.",
+    "yield_loss": 0.2
+  },
+  "rust": {
+    "suggestion": "Use sulfur-based fungicide.",
+    "yield_loss": 0.25
+  },
+  "powdery_mildew": {
+    "suggestion": "Spray neem oil solution.",
+    "yield_loss": 0.15
+  },
+  "healthy": {
+    "suggestion": "Crop is healthy. Continue normal care.",
+    "yield_loss": 0
+  }
+}

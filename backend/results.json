@@ -1,0 +1,146 @@
+[
+  {
+    "email": "guest",
+    "crop": "rice",
+    "result": {
+      "status": "fail",
+      "message": "Not suitable to grow this crop.",
+      "reasons": [
+        "Insufficient water"
+      ]
+    },
+    "date": "2026-02-14T20:16:29.801Z"
+  },
+  {
+    "email": "guest",
+    "crop": "rice",
+    "result": {
+      "status": "success",
+      "message": "You can plant this crop.",
+      "expectedYield": "44.06",
+      "expectedProfit": "881.28",
+      "harvestMonths": 4
+    },
+    "date": "2026-02-14T20:16:35.156Z"
+  },
+  {
+    "email": "guest",
+    "crop": "rice",
+    "result": {
+      "status": "success",
+      "message": "You can plant this crop.",
+      "expectedYield": "44.06",
+      "expectedProfit": "881.28",
+      "harvestMonths": 4
+    },
+    "date": "2026-02-14T20:29:24.206Z"
+  },
+  {
+    "email": "guest",
+    "crop": "tomato",
+    "result": {
+      "status": "fail",
+      "message": "Not suitable to grow this crop.",
+      "reasons": [
+        "Insufficient fertilizer"
+      ]
+    },
+    "date": "2026-02-14T20:29:38.160Z"
+  },
+  {
+    "email": "guest",
+    "crop": "tomato",
+    "result": {
+      "status": "success",
+      "message": "You can plant this crop.",
+      "expectedYield": "41.47",
+      "expectedProfit": "1036.80",
+      "harvestMonths": 2
+    },
+    "date": "2026-02-14T20:29:43.927Z"
+  },
+  {
+    "email": "guest",
+    "crop": "rice",
+    "result": {
+      "status": "fail",
+      "message": "Not suitable to grow this crop.",
+      "reasons": [
+        "Soil type not suitable"
+      ]
+    },
+    "date": "2026-02-14T20:50:34.903Z"
+  },
+  {
+    "email": "guest",
+    "crop": "rice",
+    "result": {
+      "status": "success",
+      "message": "You can plant this crop.",
+      "expectedYield": "44.06",
+      "expectedProfit": "881.28",
+      "harvestMonths": 4
+    },
+    "date": "2026-02-14T20:50:40.003Z"
+  },
+  {
+    "email": "guest",
+    "crop": "rice",
+    "result": {
+      "status": "success",
+      "message": "You can plant this crop.",
+      "expectedYield": "44.06",
+      "expectedProfit": "881.28",
+      "harvestMonths": 4
+    },
+    "date": "2026-02-14T20:50:54.611Z"
+  },
+  {
+    "email": "guest",
+    "crop": "rice",
+    "result": {
+      "status": "success",
+      "message": "You can plant this crop.",
+      "expectedYield": "44.06",
+      "expectedProfit": "881.28",
+      "harvestMonths": 4
+    },
+    "date": "2026-02-14T20:52:17.899Z"
+  },
+  {
+    "email": "guest",
+    "crop": "rice",
+    "result": {
+      "status": "success",
+      "message": "You can plant this crop.",
+      "expectedYield": "44.06",
+      "expectedProfit": "881.28",
+      "harvestMonths": 4
+    },
+    "date": "2026-02-14T21:00:02.676Z"
+  },
+  {
+    "email": "guest",
+    "crop": "maize",
+    "result": {
+      "status": "fail",
+      "message": "Not suitable to grow this crop.",
+      "reasons": [
+        "Wrong season"
+      ]
+    },
+    "date": "2026-02-14T21:51:20.707Z"
+  },
+  {
+    "email": "guest",
+    "crop": "rice",
+    "result": {
+      "status": "success",
+      "message": "You can plant this crop.",
+      "expectedYield": "44.06",
+      "expectedProfit": "881.28",
+      "harvestMonths": 4
+    },
+    "date": "2026-02-14T21:51:28.910Z"
+  }
+]
