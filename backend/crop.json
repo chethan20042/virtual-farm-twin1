@@ -1,0 +1,29 @@
+{
+  "rice": {
+    "soil": ["clayey", "loamy"],
+    "water_need": "high",
+    "fertilizer_need": "medium",
+    "base_yield": 30,
+    "price": 20,
+    "season": ["monsoon", "summer"],
+    "harvest_months": 4
+  },
+  "maize": {
+    "soil": ["loamy", "sandy"],
+    "water_need": "medium",
+    "fertilizer_need": "medium",
+    "base_yield": 25,
+    "price": 18,
+    "season": ["summer", "rainy"],
+    "harvest_months": 3
+  },
+  "tomato": {
+    "soil": ["sandy", "loamy"],
+    "water_need": "medium",
+    "fertilizer_need": "high",
+    "base_yield": 20,
+    "price": 25,
+    "season": ["summer", "spring"],
+    "harvest_months": 2
+  }
+}
