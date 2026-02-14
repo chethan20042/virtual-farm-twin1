@@ -142,5 +142,29 @@
       "harvestMonths": 4
     },
     "date": "2026-02-14T21:51:28.910Z"
+  },
+  {
+    "email": "guest",
+    "crop": "rice",
+    "result": {
+      "status": "fail",
+      "message": "Not suitable to grow this crop.",
+      "reasons": [
+        "Insufficient water"
+      ]
+    },
+    "date": "2026-02-14T21:59:41.034Z"
+  },
+  {
+    "email": "guest",
+    "crop": "rice",
+    "result": {
+      "status": "success",
+      "message": "You can plant this crop.",
+      "expectedYield": "44.06",
+      "expectedProfit": "881.28",
+      "harvestMonths": 4
+    },
+    "date": "2026-02-14T21:59:49.975Z"
   }
 ]
