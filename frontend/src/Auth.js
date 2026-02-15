@@ -44,58 +44,67 @@ function Auth() {
   };
 
   const handleSubmit = async () => {
-    // Validation
-    if (!email || !password) {
-      alert("Please fill all the details");
-      return;
-    }
+  // Validation
+  if (!email || !password) {
+    alert("Please fill all the details");
+    return;
+  }
 
-    if (!validateEmail(email)) {
-      alert("Please enter a valid email address");
-      return;
-    }
+  if (!validateEmail(email)) {
+    alert("Please enter a valid email address");
+    return;
+  }
 
-    if (!validatePassword(password)) {
-      alert("Password must be at least 6 characters");
-      return;
-    }
+  if (!validatePassword(password)) {
+    alert("Password must be at least 6 characters");
+    return;
+  }
 
-    if (!isLogin && password !== confirmPassword) {
-      alert("Passwords do not match");
-      return;
-    }
+  if (!isLogin && password !== confirmPassword) {
+    alert("Passwords do not match");
+    return;
+  }
 
-    setLoading(true);
+  setLoading(true);
 
-    try {
-      const url = isLogin
-        ? "http://localhost:5000/login"
-        : "http://localhost:5000/register";
+  try {
+    const url = isLogin
+      ? "http://localhost:5000/login"
+      : "http://localhost:5000/register";
 
-      const res = await axios.post(url, { email, password });
+    const res = await axios.post(url, { email, password });
 
-      alert(res.data.message);
+    // Show success message
+    alert(res.data.message);
 
-      // After login → go to home page
-      if (isLogin && res.data.message === "Login successful") {
-        localStorage.setItem("userEmail", email);
-        navigate("/home");
+    // After login → go to home page
+    if (isLogin && res.data.message === "Login successful") {
+      localStorage.setItem("userEmail", email);
+      // You can also store user data if needed
+      if (res.data.user) {
+        localStorage.setItem("userData", JSON.stringify(res.data.user));
       }
-
-      // After registration → switch to login
-      if (!isLogin && res.data.message === "Registration successful") {
-        setIsLogin(true);
-        setEmail("");
-        setPassword("");
-        setConfirmPassword("");
-      }
-    } catch (err) {
-      alert(err.response?.data?.message || "Operation failed");
-    } finally {
-      setLoading(false);
+      navigate("/home");
     }
-  };
 
+    // After registration → switch to login
+    if (!isLogin && res.data.message === "Registration successful") {
+      setIsLogin(true);
+      setEmail("");
+      setPassword("");
+      setConfirmPassword("");
+      // Optional: Show a success toast/notification here
+      alert("Registration successful! Please login with your credentials.");
+    }
+  } catch (err) {
+    // Better error handling
+    const errorMessage = err.response?.data?.message || "Operation failed";
+    alert(errorMessage);
+    console.error("Auth error:", errorMessage);
+  } finally {
+    setLoading(false);
+  }
+};
   const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
       handleSubmit();

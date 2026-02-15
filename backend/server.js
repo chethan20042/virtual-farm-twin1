@@ -3,6 +3,7 @@ const cors = require("cors");
 const fs = require("fs");
 const multer = require("multer");
 const path = require("path");
+const bcrypt = require("bcrypt"); // Make sure to install this
 
 const app = express();
 app.use(cors());
@@ -49,8 +50,8 @@ function simulate(
   fertilizer,
   season,
   farmSize,
-  animalAttackLoss = 0,      // percentage 0-100
-  naturalDisasterLoss = 0    // percentage 0-100
+  animalAttackLoss = 0,
+  naturalDisasterLoss = 0
 ) {
   const crop = crops[cropName];
   if (!crop) return null;
@@ -58,7 +59,6 @@ function simulate(
   let issues = [];
   const levels = { low: 1, medium: 2, high: 3 };
 
-  // Check for real mismatches
   if (!crop.soil.includes(soil)) issues.push("Soil type not suitable");
   if (season !== "rainy" && season !== "monsoon") {
     if (levels[water] < levels[crop.water_need]) issues.push("Insufficient water");
@@ -66,27 +66,22 @@ function simulate(
   if (levels[fertilizer] < levels[crop.fertilizer_need]) issues.push("Insufficient fertilizer");
   if (!crop.season.includes(season)) issues.push("Wrong season");
 
-  // Base yield calculation
   const soilFactor = crop.soil.includes(soil) ? 1.2 : 0.85;
   const waterFactor = water === crop.water_need ? 1.2 : 0.85;
   const fertFactor = fertilizer === crop.fertilizer_need ? 1.2 : 0.85;
   const seasonFactor = crop.season.includes(season) ? 1.2 : 0.85;
 
   let baseYield = crop.base_yield * soilFactor * waterFactor * fertFactor * seasonFactor * farmSize;
-  let baseProfit = baseYield * crop.price;
 
-  // Apply attack & disaster losses
   const totalLossFactor = (100 - animalAttackLoss - naturalDisasterLoss) / 100;
   const finalYield = baseYield * totalLossFactor;
   const finalProfit = finalYield * crop.price;
 
-  // Add advisory info (optional)
   if (animalAttackLoss > 0)
     issues.push(`Expected loss due to animal attacks: ${animalAttackLoss}%`);
   if (naturalDisasterLoss > 0)
     issues.push(`Expected loss due to natural disasters: ${naturalDisasterLoss}%`);
 
-  // Determine status
   const status = issues.length === 0 ? "success" : "fail";
 
   return {
@@ -99,28 +94,86 @@ function simulate(
   };
 }
 
+// ------------------- UPDATED AUTH APIs with HASHING ------------------- //
 
-// ------------------- AUTH APIs ------------------- //
+// Register endpoint with password hashing
+app.post("/register", async (req, res) => {
+  try {
+    const { email, password } = req.body;
 
-app.post("/register", (req, res) => {
-  const { email, password } = req.body;
+    // Validate input
+    if (!email || !password) {
+      return res.status(400).json({ message: "Email and password are required" });
+    }
 
-  const users = JSON.parse(fs.readFileSync("users.json"));
-  if (users.find(u => u.email === email)) return res.json({ message: "User already exists" });
+    if (password.length < 6) {
+      return res.status(400).json({ message: "Password must be at least 6 characters" });
+    }
 
-  users.push({ email, password });
-  fs.writeFileSync("users.json", JSON.stringify(users, null, 2));
-  res.json({ message: "Registration successful" });
+    const users = JSON.parse(fs.readFileSync("users.json"));
+    
+    // Check if user already exists
+    if (users.find(u => u.email === email)) {
+      return res.status(400).json({ message: "User already exists" });
+    }
+
+    // Hash the password (10 salt rounds is standard)
+    const saltRounds = 10;
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
+
+    // Store user with hashed password (NOT the original password)
+    users.push({ 
+      email, 
+      password: hashedPassword, // This will be a long hash string, not the original password
+      createdAt: new Date().toISOString()
+    });
+    
+    fs.writeFileSync("users.json", JSON.stringify(users, null, 2));
+    
+    res.json({ message: "Registration successful" });
+  } catch (error) {
+    console.error("Registration error:", error);
+    res.status(500).json({ message: "Server error during registration" });
+  }
 });
 
-app.post("/login", (req, res) => {
-  const { email, password } = req.body;
+// Login endpoint with password verification
+app.post("/login", async (req, res) => {
+  try {
+    const { email, password } = req.body;
 
-  const users = JSON.parse(fs.readFileSync("users.json"));
-  const user = users.find(u => u.email === email && u.password === password);
+    // Validate input
+    if (!email || !password) {
+      return res.status(400).json({ message: "Email and password are required" });
+    }
 
-  if (!user) return res.json({ message: "Invalid credentials" });
-  res.json({ message: "Login successful" });
+    const users = JSON.parse(fs.readFileSync("users.json"));
+    const user = users.find(u => u.email === email);
+
+    // Check if user exists
+    if (!user) {
+      return res.status(401).json({ message: "Invalid credentials" });
+    }
+
+    // Compare password with hashed password
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+
+    if (!isPasswordValid) {
+      return res.status(401).json({ message: "Invalid credentials" });
+    }
+
+    // Login successful - don't send password back
+    res.json({ 
+      message: "Login successful",
+      user: {
+        email: user.email,
+        createdAt: user.createdAt
+      }
+    });
+  } catch (error) {
+    console.error("Login error:", error);
+    res.status(500).json({ message: "Server error during login" });
+  }
 });
 
 // ------------------- MAIN APIs ------------------- //
