@@ -1,3 +1,73 @@
 [
-  
+  {
+    "email": "chethanmshetty255@gmail.com",
+    "crop": "rice",
+    "result": {
+      "status": "success",
+      "message": "You can plant this crop.",
+      "reasons": [],
+      "expectedYield": "36.72",
+      "expectedProfit": "734400.00",
+      "harvestMonths": 4
+    },
+    "date": "2026-02-15T05:17:11.702Z"
+  },
+  {
+    "email": "chethanmshetty255@gmail.com",
+    "crop": "rice",
+    "result": {
+      "status": "fail",
+      "message": "Crop growth may be affected.",
+      "reasons": [
+        "Wrong season"
+      ],
+      "expectedYield": "26.01",
+      "expectedProfit": "520200.00",
+      "harvestMonths": 4
+    },
+    "date": "2026-02-15T05:20:26.030Z"
+  },
+  {
+    "email": "chethanmshetty255@gmail.com",
+    "crop": "maize",
+    "result": {
+      "status": "success",
+      "message": "You can plant this crop.",
+      "reasons": [],
+      "expectedYield": "26.01",
+      "expectedProfit": "468180.00",
+      "harvestMonths": 3
+    },
+    "date": "2026-02-15T05:21:10.668Z"
+  },
+  {
+    "email": "chethanmshetty255@gmail.com",
+    "crop": "maize",
+    "result": {
+      "status": "fail",
+      "message": "Crop growth may be affected.",
+      "reasons": [
+        "Expected loss due to animal attacks: 1%"
+      ],
+      "expectedYield": "25.75",
+      "expectedProfit": "463498.20",
+      "harvestMonths": 3
+    },
+    "date": "2026-02-15T05:21:18.086Z"
+  },
+  {
+    "email": "chethanmshetty255@gmail.com",
+    "crop": "maize",
+    "result": {
+      "status": "fail",
+      "message": "Crop growth may be affected.",
+      "reasons": [
+        "Expected loss due to animal attacks: 100%"
+      ],
+      "expectedYield": "0.00",
+      "expectedProfit": "0.00",
+      "harvestMonths": 3
+    },
+    "date": "2026-02-15T05:21:39.379Z"
+  }
 ]
