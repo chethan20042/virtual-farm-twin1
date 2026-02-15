@@ -453,7 +453,7 @@ function Home() {
                 <span className="contact-icon">📍</span>
                 <div>
                   <h4>Address</h4>
-                  <p>AgriTwin Tech Park, Smart City<br />Agricultural District, India</p>
+                  <p>AgriTwin Tech Park, Smart City<br />SPC Puttur</p>
                 </div>
               </div>
               
@@ -461,7 +461,7 @@ function Home() {
                 <span className="contact-icon">📧</span>
                 <div>
                   <h4>Email</h4>
-                  <p>support@agritwin.com<br />info@agritwin.com</p>
+                  <p>chethan@gmail.com<br />spc@gmail.com</p>
                 </div>
               </div>
               
@@ -469,7 +469,7 @@ function Home() {
                 <span className="contact-icon">📱</span>
                 <div>
                   <h4>Phone</h4>
-                  <p>+91 123 456 7890<br />+91 098 765 4321</p>
+                  <p>+91 7259864537<br />+91 9767856457</p>
                 </div>
               </div>
             </div>

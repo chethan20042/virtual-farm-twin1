@@ -1,0 +1,374 @@
+.farm3d-container {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.farm3d-canvas {
+  width: 100%;
+  height: 100%;
+  cursor: grab;
+}
+
+.farm3d-canvas:active {
+  cursor: grabbing;
+}
+
+/* Loading Overlay */
+.loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  color: white;
+  backdrop-filter: blur(5px);
+}
+
+.spinner {
+  width: 60px;
+  height: 60px;
+  border: 5px solid rgba(76, 175, 80, 0.3);
+  border-radius: 50%;
+  border-top-color: #4caf50;
+  animation: spin 1s ease-in-out infinite;
+  margin-bottom: 20px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.loading-progress {
+  width: 200px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 2px;
+  margin-top: 20px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #4caf50, #81c784);
+  transition: width 0.3s ease;
+  border-radius: 2px;
+}
+
+/* Error Overlay */
+.error-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(244, 67, 54, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  backdrop-filter: blur(5px);
+}
+
+.error-overlay p {
+  background: white;
+  padding: 20px 30px;
+  border-radius: 10px;
+  color: #f44336;
+  margin-bottom: 20px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  font-weight: 600;
+}
+
+.error-overlay button {
+  padding: 12px 40px;
+  background: #2e7d32;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.error-overlay button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(46, 125, 50, 0.4);
+}
+
+/* Camera Controls */
+.camera-controls {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 5;
+  display: flex;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 6px;
+  border-radius: 40px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  animation: slideInRight 0.5s ease;
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.camera-btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 30px;
+  background: transparent;
+  color: #666;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.camera-btn:hover {
+  background: rgba(76, 175, 80, 0.1);
+  color: #2e7d32;
+}
+
+.camera-btn.active {
+  background: #2e7d32;
+  color: white;
+  box-shadow: 0 4px 10px rgba(46, 125, 50, 0.3);
+}
+
+/* Farm Info Panel */
+.farm-info-panel {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 5;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 20px;
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  animation: slideInLeft 0.5s ease;
+  min-width: 220px;
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.farm-info-panel h4 {
+  color: #1b5e20;
+  margin: 0 0 15px 0;
+  font-size: 1.1rem;
+  border-bottom: 2px solid #81c784;
+  padding-bottom: 8px;
+}
+
+.farm-info-panel p {
+  margin: 10px 0;
+  color: #555;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.95rem;
+}
+
+.farm-info-panel p span {
+  font-weight: 600;
+  color: #1b5e20;
+}
+
+/* Controls Hint */
+.controls-hint {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 8px 20px;
+  border-radius: 40px;
+  font-size: 0.9rem;
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  animation: fadeInUp 0.5s ease 0.5s both;
+  white-space: nowrap;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 20px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .camera-controls {
+    flex-direction: column;
+    top: 10px;
+    right: 10px;
+  }
+  
+  .farm-info-panel {
+    top: 10px;
+    left: 10px;
+    padding: 15px;
+    min-width: 180px;
+  }
+  
+  .farm-info-panel h4 {
+    font-size: 1rem;
+  }
+  
+  .farm-info-panel p {
+    font-size: 0.85rem;
+    margin: 8px 0;
+  }
+  
+  .controls-hint {
+    font-size: 0.8rem;
+    padding: 6px 12px;
+    bottom: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .farm-info-panel {
+    display: none;
+  }
+  
+  .camera-controls {
+    top: 10px;
+    right: 10px;
+    flex-direction: row;
+    padding: 4px;
+  }
+  
+  .camera-btn {
+    padding: 6px 10px;
+    font-size: 0.75rem;
+  }
+  
+  .controls-hint {
+    display: none;
+  }
+  
+  .loading-progress {
+    width: 150px;
+  }
+}
+/* Add these styles to your existing Farm3D.css */
+
+.loading-texture-info {
+  font-size: 0.9rem;
+  color: #ccc;
+  margin-top: 10px;
+}
+
+/* Better styling for image-based plants */
+.farm3d-canvas {
+  width: 100%;
+  height: 100%;
+  cursor: grab;
+}
+
+.farm3d-canvas:active {
+  cursor: grabbing;
+}
+
+/* Enhance the info panel */
+.farm-info-panel {
+  background: rgba(255, 255, 255, 0.98);
+  border-left: 4px solid #4caf50;
+}
+
+.farm-info-panel p {
+  border-bottom: 1px dashed #e0e0e0;
+  padding-bottom: 8px;
+}
+
+.farm-info-panel p:last-child {
+  border-bottom: none;
+}
+
+/* Camera controls enhancement */
+.camera-btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.camera-btn::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.3s, height 0.3s;
+}
+
+.camera-btn:active::after {
+  width: 100px;
+  height: 100px;
+}
+
+/* Loading overlay enhancement */
+.loading-overlay {
+  background: linear-gradient(135deg, rgba(0,0,0,0.9), rgba(46,125,50,0.8));
+}
+
+/* Success animation when loaded */
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.farm3d-container {
+  animation: fadeInScale 0.5s ease;
+}
