@@ -16,6 +16,7 @@ const diseases = JSON.parse(fs.readFileSync("diseases.json"));
 // Ensure JSON storage files exist
 if (!fs.existsSync("users.json")) fs.writeFileSync("users.json", "[]");
 if (!fs.existsSync("results.json")) fs.writeFileSync("results.json", "[]");
+if (!fs.existsSync("contacts.json")) fs.writeFileSync("contacts.json", "[]"); // Add this for contact messages
 
 // Ensure uploads folder exists
 if (!fs.existsSync("uploads")) fs.mkdirSync("uploads");
@@ -94,7 +95,7 @@ function simulate(
   };
 }
 
-// ------------------- UPDATED AUTH APIs with HASHING ------------------- //
+// ------------------- AUTH APIs with HASHING ------------------- //
 
 // Register endpoint with password hashing
 app.post("/register", async (req, res) => {
@@ -121,10 +122,10 @@ app.post("/register", async (req, res) => {
     const saltRounds = 10;
     const hashedPassword = await bcrypt.hash(password, saltRounds);
 
-    // Store user with hashed password (NOT the original password)
+    // Store user with hashed password
     users.push({ 
       email, 
-      password: hashedPassword, // This will be a long hash string, not the original password
+      password: hashedPassword,
       createdAt: new Date().toISOString()
     });
     
@@ -230,6 +231,90 @@ app.post("/detect-disease", upload.single("cropImage"), (req, res) => {
     suggestion: data.suggestion,
     yieldLoss: data.yield_loss
   });
+});
+
+// ------------------- NEW CONTACT API ------------------- //
+
+// Contact form endpoint
+app.post("/contact", (req, res) => {
+  try {
+    const { name, email, message, date } = req.body;
+
+    // Validate input
+    if (!name || !email || !message) {
+      return res.status(400).json({ 
+        success: false,
+        message: "Name, email and message are required" 
+      });
+    }
+
+    // Read existing contacts
+    const contacts = JSON.parse(fs.readFileSync("contacts.json"));
+
+    // Create new contact entry
+    const newContact = {
+      id: Date.now(),
+      name,
+      email,
+      message,
+      date: date || new Date().toISOString(),
+      status: "unread" // Track if message has been read
+    };
+
+    // Add to contacts array
+    contacts.push(newContact);
+
+    // Save to file
+    fs.writeFileSync("contacts.json", JSON.stringify(contacts, null, 2));
+
+    // Send success response
+    res.json({
+      success: true,
+      message: "Thank you for contacting us! We'll get back to you soon.",
+      contactId: newContact.id
+    });
+
+    // Optional: Log to console for demo purposes
+    console.log("New contact message received:");
+    console.log(`From: ${name} (${email})`);
+    console.log(`Message: ${message}`);
+    console.log("------------------------");
+
+  } catch (error) {
+    console.error("Contact form error:", error);
+    res.status(500).json({ 
+      success: false,
+      message: "Failed to save your message. Please try again." 
+    });
+  }
+});
+
+// Optional: Get all contact messages (for admin purposes)
+app.get("/contacts", (req, res) => {
+  try {
+    const contacts = JSON.parse(fs.readFileSync("contacts.json"));
+    res.json(contacts);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to retrieve contacts" });
+  }
+});
+
+// Optional: Mark message as read
+app.patch("/contacts/:id/read", (req, res) => {
+  try {
+    const contacts = JSON.parse(fs.readFileSync("contacts.json"));
+    const contact = contacts.find(c => c.id === parseInt(req.params.id));
+    
+    if (contact) {
+      contact.status = "read";
+      fs.writeFileSync("contacts.json", JSON.stringify(contacts, null, 2));
+      res.json({ success: true, message: "Contact marked as read" });
+    } else {
+      res.status(404).json({ success: false, message: "Contact not found" });
+    }
+  } catch (error) {
+    res.status(500).json({ error: "Failed to update contact" });
+  }
 });
 
 // ------------------- START SERVER ------------------- //

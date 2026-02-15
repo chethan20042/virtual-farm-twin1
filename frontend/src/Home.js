@@ -17,6 +17,16 @@ function Home() {
     naturalDisaster: 0
   });
 
+  // Add contact form state
+  const [contactForm, setContactForm] = useState({
+    name: '',
+    email: '',
+    message: ''
+  });
+  const [sendingMessage, setSendingMessage] = useState(false);
+  const [messageSent, setMessageSent] = useState(false);
+  const [contactResult, setContactResult] = useState(null); // Store response from backend
+
   const [result, setResult] = useState(null);
   const [diseaseResult, setDiseaseResult] = useState(null);
   const [image, setImage] = useState(null);
@@ -40,6 +50,46 @@ function Home() {
 
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
+
+  // Add contact form change handler
+  const handleContactChange = (e) => {
+    setContactForm({ ...contactForm, [e.target.name]: e.target.value });
+  };
+
+  // Updated send message function to use your backend
+  const sendMessage = async (e) => {
+    e.preventDefault();
+    setSendingMessage(true);
+    setContactResult(null); // Clear previous result
+    
+    try {
+      // Send message to your backend
+      const res = await axios.post("http://localhost:5000/contact", {
+        name: contactForm.name,
+        email: contactForm.email,
+        message: contactForm.message,
+        date: new Date().toISOString()
+      });
+      
+      // Store the response from backend
+      setContactResult(res.data);
+      
+      // Show success message
+      setMessageSent(true);
+      setContactForm({ name: '', email: '', message: '' });
+      setTimeout(() => setMessageSent(false), 5000);
+      
+    } catch (err) {
+      console.error('Contact error:', err);
+      setContactResult({
+        success: false,
+        message: "Failed to send message. Please try again."
+      });
+      alert("Failed to send message. Please try again.");
+    } finally {
+      setSendingMessage(false);
+    }
+  };
 
   const simulate = async () => {
     setLoading(true);
@@ -124,19 +174,16 @@ function Home() {
       <header className="header">
         <div className="container header-container">
           <div className="logo-container">
-            {/* Logo Image - Fixed path for public folder */}
             <img 
               src="/textures/Final logo.png" 
               alt="AgriTwin Logo" 
               className="logo-image"
               onError={(e) => {
-                // Fallback to text logo if image fails to load
                 e.target.style.display = 'none';
                 const textLogo = e.target.nextSibling;
                 if (textLogo) {
                   textLogo.style.display = 'flex';
                 }
-                console.log("Logo failed to load, using text fallback");
               }}
             />
             <div className="logo-text" style={{ display: 'none' }}>
@@ -192,7 +239,6 @@ function Home() {
       <section className="hero" id="home">
         <div className="container hero-container">
           <div className="hero-text">
-            {/* Hero logo - using the same path */}
             {!logoError && (
               <div className="hero-logo">
                 <img 
@@ -229,7 +275,6 @@ function Home() {
         <div className="container">
           <div className="section-header">
             <h2>
-              {/* Small logo in section header */}
               {!logoError && (
                 <img 
                   src="/textures/Final logo.png" 
@@ -285,7 +330,6 @@ function Home() {
               </div>
             </div>
             
-            {/* Loss inputs in a separate row */}
             <div className="form-grid" style={{ marginTop: '20px' }}>
               <div className="form-item">
                 <label>Animal Attack Loss (%)</label>
@@ -380,7 +424,6 @@ function Home() {
 
                     <div className="farm-visualization">
                       <h4>
-                        {/* Small logo in visualization title */}
                         {!logoError && (
                           <img 
                             src="/textures/Final logo.png" 
@@ -502,7 +545,7 @@ function Home() {
         </div>
       </section>
 
-      {/* CONTACT SECTION */}
+      {/* CONTACT SECTION - Updated to work with backend */}
       <section className="contact-section section" id="contact">
         <div className="container">
           <div className="section-header">
@@ -549,10 +592,55 @@ function Home() {
             </div>
 
             <div className="contact-form">
-              <input type="text" placeholder="Your Name" />
-              <input type="email" placeholder="Your Email" />
-              <textarea placeholder="Your Message" rows="4"></textarea>
-              <button className="submit-btn">Send Message</button>
+              {messageSent && (
+                <div className="success-message">
+                  ✓ {contactResult?.message || "Message sent successfully! We'll get back to you soon."}
+                </div>
+              )}
+              
+              {contactResult && !contactResult.success && (
+                <div className="error-message">
+                  ⚠ {contactResult.message}
+                </div>
+              )}
+              
+              <form onSubmit={sendMessage}>
+                <input 
+                  type="text" 
+                  name="name"
+                  placeholder="Your Name" 
+                  value={contactForm.name}
+                  onChange={handleContactChange}
+                  required 
+                />
+                <input 
+                  type="email" 
+                  name="email"
+                  placeholder="Your Email" 
+                  value={contactForm.email}
+                  onChange={handleContactChange}
+                  required 
+                />
+                <textarea 
+                  name="message"
+                  placeholder="Your Message" 
+                  rows="4"
+                  value={contactForm.message}
+                  onChange={handleContactChange}
+                  required
+                ></textarea>
+                <button 
+                  type="submit" 
+                  className="submit-btn"
+                  disabled={sendingMessage}
+                >
+                  {sendingMessage ? (
+                    <span className="loading-spinner">⟳ Sending...</span>
+                  ) : (
+                    "Send Message"
+                  )}
+                </button>
+              </form>
             </div>
           </div>
         </div>

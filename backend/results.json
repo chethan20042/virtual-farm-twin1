@@ -1,1 +1,41 @@
-[]
+[
+  {
+    "email": "chethanmshetty255@gmail.com",
+    "crop": "rice",
+    "result": {
+      "status": "success",
+      "message": "You can plant this crop.",
+      "reasons": [],
+      "expectedYield": "36.72",
+      "expectedProfit": "734400.00",
+      "harvestMonths": 4
+    },
+    "date": "2026-02-15T06:54:13.791Z"
+  },
+  {
+    "email": "chethanmshetty255@gmail.com",
+    "crop": "maize",
+    "result": {
+      "status": "success",
+      "message": "You can plant this crop.",
+      "reasons": [],
+      "expectedYield": "51.84",
+      "expectedProfit": "933120.00",
+      "harvestMonths": 3
+    },
+    "date": "2026-02-15T07:22:41.105Z"
+  },
+  {
+    "email": "chethanmshetty255@gmail.com",
+    "crop": "rice",
+    "result": {
+      "status": "success",
+      "message": "You can plant this crop.",
+      "reasons": [],
+      "expectedYield": "36.72",
+      "expectedProfit": "734400.00",
+      "harvestMonths": 4
+    },
+    "date": "2026-02-15T07:25:32.581Z"
+  }
+]
