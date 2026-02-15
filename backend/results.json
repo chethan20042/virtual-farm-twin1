@@ -166,5 +166,348 @@
       "harvestMonths": 4
     },
     "date": "2026-02-14T21:59:49.975Z"
+  },
+  {
+    "email": "guest",
+    "crop": "rice",
+    "result": {
+      "status": "success",
+      "message": "You can plant this crop.",
+      "expectedYield": "44.06",
+      "expectedProfit": "881.28",
+      "harvestMonths": 4
+    },
+    "date": "2026-02-14T22:25:54.923Z"
+  },
+  {
+    "email": "guest",
+    "crop": "rice",
+    "result": {
+      "status": "success",
+      "message": "You can plant this crop.",
+      "expectedYield": "44.06",
+      "expectedProfit": "881.28",
+      "harvestMonths": 4
+    },
+    "date": "2026-02-14T22:40:28.529Z"
+  },
+  {
+    "email": "guest",
+    "crop": "rice",
+    "result": {
+      "status": "success",
+      "message": "You can plant this crop.",
+      "expectedYield": "36.72",
+      "expectedProfit": "734400.00",
+      "harvestMonths": 4
+    },
+    "date": "2026-02-14T22:43:14.654Z"
+  },
+  {
+    "email": "guest",
+    "crop": "rice",
+    "result": {
+      "status": "success",
+      "message": "You can plant this crop.",
+      "expectedYield": "36.72",
+      "expectedProfit": "734400.00",
+      "harvestMonths": 4
+    },
+    "date": "2026-02-14T23:08:10.721Z"
+  },
+  {
+    "email": "guest",
+    "crop": "rice",
+    "result": {
+      "status": "success",
+      "message": "You can plant this crop.",
+      "expectedYield": "36.72",
+      "expectedProfit": "734400.00",
+      "harvestMonths": 4
+    },
+    "date": "2026-02-14T23:08:29.754Z"
+  },
+  {
+    "email": "guest",
+    "crop": "rice",
+    "result": {
+      "status": "success",
+      "message": "You can plant this crop.",
+      "expectedYield": "36.72",
+      "expectedProfit": "734400.00",
+      "harvestMonths": 4
+    },
+    "date": "2026-02-14T23:13:47.740Z"
+  },
+  {
+    "email": "guest",
+    "crop": "rice",
+    "result": {
+      "status": "success",
+      "message": "You can plant this crop.",
+      "expectedYield": "26.01",
+      "expectedProfit": "520200.00",
+      "harvestMonths": 4
+    },
+    "date": "2026-02-14T23:13:59.576Z"
+  },
+  {
+    "email": "guest",
+    "crop": "rice",
+    "result": {
+      "status": "success",
+      "message": "You can plant this crop.",
+      "expectedYield": "26.01",
+      "expectedProfit": "520200.00",
+      "harvestMonths": 4
+    },
+    "date": "2026-02-14T23:14:12.555Z"
+  },
+  {
+    "email": "guest",
+    "crop": "rice",
+    "result": {
+      "status": "success",
+      "message": "You can plant this crop.",
+      "expectedYield": "36.72",
+      "expectedProfit": "734400.00",
+      "harvestMonths": 4
+    },
+    "date": "2026-02-14T23:32:10.587Z"
+  },
+  {
+    "email": "guest",
+    "crop": "rice",
+    "result": {
+      "status": "success",
+      "message": "You can plant this crop.",
+      "expectedYield": "36.72",
+      "expectedProfit": "734400.00",
+      "harvestMonths": 4
+    },
+    "date": "2026-02-14T23:32:24.896Z"
+  },
+  {
+    "email": "guest",
+    "crop": "rice",
+    "result": {
+      "status": "success",
+      "message": "You can plant this crop.",
+      "expectedYield": "36.72",
+      "expectedProfit": "734400.00",
+      "harvestMonths": 4
+    },
+    "date": "2026-02-14T23:32:26.069Z"
+  },
+  {
+    "email": "guest",
+    "crop": "rice",
+    "result": {
+      "status": "success",
+      "message": "You can plant this crop.",
+      "expectedYield": "36.72",
+      "expectedProfit": "734400.00",
+      "harvestMonths": 4
+    },
+    "date": "2026-02-14T23:32:28.381Z"
+  },
+  {
+    "email": "guest",
+    "crop": "rice",
+    "result": {
+      "status": "success",
+      "message": "You can plant this crop.",
+      "expectedYield": "36.72",
+      "expectedProfit": "734400.00",
+      "harvestMonths": 4
+    },
+    "date": "2026-02-14T23:32:33.108Z"
+  },
+  {
+    "email": "guest",
+    "crop": "rice",
+    "result": {
+      "status": "success",
+      "message": "You can plant this crop.",
+      "expectedYield": "36.72",
+      "expectedProfit": "734400.00",
+      "harvestMonths": 4
+    },
+    "date": "2026-02-14T23:48:26.596Z"
+  },
+  {
+    "email": "guest",
+    "crop": "rice",
+    "result": {
+      "status": "fail",
+      "message": "Not suitable to grow this crop.",
+      "reasons": [
+        "Possible yield loss due to animal attacks (4%)",
+        "Possible yield loss due to natural disasters (4%)"
+      ],
+      "expectedYield": "33.78",
+      "expectedProfit": "675648.00"
+    },
+    "date": "2026-02-14T23:48:42.334Z"
+  },
+  {
+    "email": "guest",
+    "crop": "rice",
+    "result": {
+      "status": "fail",
+      "message": "Not suitable to grow this crop.",
+      "reasons": [
+        "Possible yield loss due to animal attacks (4%)",
+        "Possible yield loss due to natural disasters (2%)"
+      ],
+      "expectedYield": "34.52",
+      "expectedProfit": "690336.00"
+    },
+    "date": "2026-02-14T23:48:52.002Z"
+  },
+  {
+    "email": "guest",
+    "crop": "rice",
+    "result": {
+      "status": "fail",
+      "message": "Not suitable to grow this crop.",
+      "reasons": [
+        "Possible yield loss due to animal attacks (1%)",
+        "Possible yield loss due to natural disasters (2%)"
+      ],
+      "expectedYield": "35.62",
+      "expectedProfit": "712368.00"
+    },
+    "date": "2026-02-14T23:49:05.162Z"
+  },
+  {
+    "email": "guest",
+    "crop": "rice",
+    "result": {
+      "status": "fail",
+      "message": "Not suitable to grow this crop.",
+      "reasons": [
+        "Possible yield loss due to animal attacks (1%)",
+        "Possible yield loss due to natural disasters (2%)"
+      ],
+      "expectedYield": "35.62",
+      "expectedProfit": "712368.00"
+    },
+    "date": "2026-02-14T23:49:06.262Z"
+  },
+  {
+    "email": "guest",
+    "crop": "rice",
+    "result": {
+      "status": "fail",
+      "message": "Not suitable to grow this crop.",
+      "reasons": [
+        "Possible yield loss due to animal attacks (1%)",
+        "Possible yield loss due to natural disasters (3%)"
+      ],
+      "expectedYield": "35.25",
+      "expectedProfit": "705024.00"
+    },
+    "date": "2026-02-14T23:49:09.910Z"
+  },
+  {
+    "email": "guest",
+    "crop": "rice",
+    "result": {
+      "status": "fail",
+      "message": "Crop growth may be affected.",
+      "reasons": [
+        "Insufficient water"
+      ],
+      "expectedYield": "36.72",
+      "expectedProfit": "734400.00",
+      "harvestMonths": 4
+    },
+    "date": "2026-02-14T23:59:55.106Z"
+  },
+  {
+    "email": "guest",
+    "crop": "rice",
+    "result": {
+      "status": "success",
+      "message": "You can plant this crop.",
+      "reasons": [],
+      "expectedYield": "36.72",
+      "expectedProfit": "734400.00",
+      "harvestMonths": 4
+    },
+    "date": "2026-02-15T00:00:03.251Z"
+  },
+  {
+    "email": "guest",
+    "crop": "rice",
+    "result": {
+      "status": "fail",
+      "message": "Crop growth may be affected.",
+      "reasons": [
+        "Expected loss due to animal attacks: 2%"
+      ],
+      "expectedYield": "35.99",
+      "expectedProfit": "719712.00",
+      "harvestMonths": 4
+    },
+    "date": "2026-02-15T00:00:12.481Z"
+  },
+  {
+    "email": "guest",
+    "crop": "rice",
+    "result": {
+      "status": "fail",
+      "message": "Crop growth may be affected.",
+      "reasons": [
+        "Expected loss due to animal attacks: 2%",
+        "Expected loss due to natural disasters: 3%"
+      ],
+      "expectedYield": "34.88",
+      "expectedProfit": "697680.00",
+      "harvestMonths": 4
+    },
+    "date": "2026-02-15T00:00:34.493Z"
+  },
+  {
+    "email": "guest",
+    "crop": "rice",
+    "result": {
+      "status": "success",
+      "message": "You can plant this crop.",
+      "reasons": [],
+      "expectedYield": "36.72",
+      "expectedProfit": "734400.00",
+      "harvestMonths": 4
+    },
+    "date": "2026-02-15T00:00:56.512Z"
+  },
+  {
+    "email": "guest",
+    "crop": "maize",
+    "result": {
+      "status": "fail",
+      "message": "Crop growth may be affected.",
+      "reasons": [
+        "Wrong season"
+      ],
+      "expectedYield": "36.72",
+      "expectedProfit": "660960.00",
+      "harvestMonths": 3
+    },
+    "date": "2026-02-15T00:01:21.856Z"
+  },
+  {
+    "email": "guest",
+    "crop": "maize",
+    "result": {
+      "status": "success",
+      "message": "You can plant this crop.",
+      "reasons": [],
+      "expectedYield": "26.01",
+      "expectedProfit": "468180.00",
+      "harvestMonths": 3
+    },
+    "date": "2026-02-15T00:01:39.355Z"
   }
 ]

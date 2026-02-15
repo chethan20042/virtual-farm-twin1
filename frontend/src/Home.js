@@ -6,14 +6,17 @@ import Farm3D from "./Farm3D";
 function Home() {
   const [crops, setCrops] = useState([]);
   const [form, setForm] = useState({
-    crop: "",
-    soil: "loamy",
-    water: "medium",
-    fertilizer: "medium",
-    season: "summer",
-    farmSize: 1,
-    email: localStorage.getItem("userEmail") || "guest"
-  });
+  crop: "",
+  soil: "loamy",
+  water: "medium",
+  fertilizer: "medium",
+  season: "summer",
+  farmSize: 1,
+  email: localStorage.getItem("userEmail") || "guest",
+  animalAttack: 0,
+  naturalDisaster: 0
+});
+
 
   const [result, setResult] = useState(null);
   const [diseaseResult, setDiseaseResult] = useState(null);
@@ -39,16 +42,21 @@ function Home() {
     setForm({ ...form, [e.target.name]: e.target.value });
 
   const simulate = async () => {
-    setLoading(true);
-    try {
-      const res = await axios.post("http://localhost:5000/simulate", form);
-      setResult(res.data);
-    } catch (err) {
-      alert("Simulation failed");
-    } finally {
-      setLoading(false);
-    }
-  };
+  setLoading(true);
+  try {
+    const res = await axios.post("http://localhost:5000/simulate", {
+      ...form,
+      animalAttackLoss: form.animalAttack || 0,        // from input field
+      naturalDisasterLoss: form.naturalDisaster || 0  // from input field
+    });
+    setResult(res.data);
+  } catch (err) {
+    alert("Simulation failed");
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -235,6 +243,29 @@ function Home() {
                 />
               </div>
             </div>
+           <div className="form-item">
+  <label>Animal Attack Loss (%)</label>
+  <input
+    type="number"
+    name="animalAttack"
+    min="0"
+    max="100"
+    value={form.animalAttack || 0}
+    onChange={handleChange}
+  />
+</div>
+
+<div className="form-item">
+  <label>Natural Disaster Loss (%)</label>
+  <input
+    type="number"
+    name="naturalDisaster"
+    min="0"
+    max="100"
+    value={form.naturalDisaster || 0}
+    onChange={handleChange}
+  />
+</div>
 
             <button 
               className="simulate-btn" 
