@@ -509,5 +509,59 @@
       "harvestMonths": 3
     },
     "date": "2026-02-15T00:01:39.355Z"
+  },
+  {
+    "email": "guest",
+    "crop": "tomato",
+    "result": {
+      "status": "fail",
+      "message": "Crop growth may be affected.",
+      "reasons": [
+        "Insufficient fertilizer"
+      ],
+      "expectedYield": "29.38",
+      "expectedProfit": "734400.00",
+      "harvestMonths": 2
+    },
+    "date": "2026-02-15T00:10:57.954Z"
+  },
+  {
+    "email": "guest",
+    "crop": "tomato",
+    "result": {
+      "status": "success",
+      "message": "You can plant this crop.",
+      "reasons": [],
+      "expectedYield": "29.38",
+      "expectedProfit": "734400.00",
+      "harvestMonths": 2
+    },
+    "date": "2026-02-15T00:11:09.348Z"
+  },
+  {
+    "email": "guest",
+    "crop": "maize",
+    "result": {
+      "status": "success",
+      "message": "You can plant this crop.",
+      "reasons": [],
+      "expectedYield": "26.01",
+      "expectedProfit": "468180.00",
+      "harvestMonths": 3
+    },
+    "date": "2026-02-15T00:11:48.503Z"
+  },
+  {
+    "email": "guest",
+    "crop": "maize",
+    "result": {
+      "status": "success",
+      "message": "You can plant this crop.",
+      "reasons": [],
+      "expectedYield": "26.01",
+      "expectedProfit": "468180.00",
+      "harvestMonths": 3
+    },
+    "date": "2026-02-15T00:11:49.632Z"
   }
 ]
