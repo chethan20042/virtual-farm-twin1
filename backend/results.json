@@ -836,5 +836,47 @@
       "harvestMonths": 3
     },
     "date": "2026-02-15T03:43:52.485Z"
+  },
+  {
+    "email": "chethanmshetty255@gmail.com",
+    "crop": "rice",
+    "result": {
+      "status": "success",
+      "message": "You can plant this crop.",
+      "reasons": [],
+      "expectedYield": "36.72",
+      "expectedProfit": "734400.00",
+      "harvestMonths": 4
+    },
+    "date": "2026-02-15T03:59:14.825Z"
+  },
+  {
+    "email": "chethanmshetty255@gmail.com",
+    "crop": "tomato",
+    "result": {
+      "status": "fail",
+      "message": "Crop growth may be affected.",
+      "reasons": [
+        "Insufficient fertilizer",
+        "Wrong season"
+      ],
+      "expectedYield": "20.81",
+      "expectedProfit": "520200.00",
+      "harvestMonths": 2
+    },
+    "date": "2026-02-15T04:06:18.188Z"
+  },
+  {
+    "email": "chethanmshetty255@gmail.com",
+    "crop": "rice",
+    "result": {
+      "status": "success",
+      "message": "You can plant this crop.",
+      "reasons": [],
+      "expectedYield": "36.72",
+      "expectedProfit": "734400.00",
+      "harvestMonths": 4
+    },
+    "date": "2026-02-15T04:06:25.443Z"
   }
 ]

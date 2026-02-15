@@ -6,17 +6,16 @@ import Farm3D from "./Farm3D";
 function Home() {
   const [crops, setCrops] = useState([]);
   const [form, setForm] = useState({
-  crop: "",
-  soil: "loamy",
-  water: "medium",
-  fertilizer: "medium",
-  season: "summer",
-  farmSize: 1,
-  email: localStorage.getItem("userEmail") || "guest",
-  animalAttack: 0,
-  naturalDisaster: 0
-});
-
+    crop: "",
+    soil: "loamy",
+    water: "medium",
+    fertilizer: "medium",
+    season: "summer",
+    farmSize: 1,
+    email: localStorage.getItem("userEmail") || "guest",
+    animalAttack: 0,
+    naturalDisaster: 0
+  });
 
   const [result, setResult] = useState(null);
   const [diseaseResult, setDiseaseResult] = useState(null);
@@ -25,6 +24,7 @@ function Home() {
   const [loading, setLoading] = useState(false);
   const [diseaseLoading, setDiseaseLoading] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
+  const [logoError, setLogoError] = useState(false);
 
   const soils = ["sandy", "loamy", "clayey"];
   const waters = ["low", "medium", "high"];
@@ -42,21 +42,20 @@ function Home() {
     setForm({ ...form, [e.target.name]: e.target.value });
 
   const simulate = async () => {
-  setLoading(true);
-  try {
-    const res = await axios.post("http://localhost:5000/simulate", {
-      ...form,
-      animalAttackLoss: form.animalAttack || 0,        // from input field
-      naturalDisasterLoss: form.naturalDisaster || 0  // from input field
-    });
-    setResult(res.data);
-  } catch (err) {
-    alert("Simulation failed");
-  } finally {
-    setLoading(false);
-  }
-};
-
+    setLoading(true);
+    try {
+      const res = await axios.post("http://localhost:5000/simulate", {
+        ...form,
+        animalAttackLoss: form.animalAttack || 0,
+        naturalDisasterLoss: form.naturalDisaster || 0
+      });
+      setResult(res.data);
+    } catch (err) {
+      alert("Simulation failed");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -108,6 +107,11 @@ function Home() {
     setActiveSection(sectionId);
   };
 
+  // Handle logo error
+  const handleLogoError = () => {
+    setLogoError(true);
+  };
+
   return (
     <div className="App">
       <div className="top-strip">
@@ -119,9 +123,26 @@ function Home() {
 
       <header className="header">
         <div className="container header-container">
-          <div className="logo">
-            <span className="logo-icon">🌾</span>
-            AgriTwin
+          <div className="logo-container">
+            {/* Logo Image - Fixed path for public folder */}
+            <img 
+              src="/textures/Final logo.png" 
+              alt="AgriTwin Logo" 
+              className="logo-image"
+              onError={(e) => {
+                // Fallback to text logo if image fails to load
+                e.target.style.display = 'none';
+                const textLogo = e.target.nextSibling;
+                if (textLogo) {
+                  textLogo.style.display = 'flex';
+                }
+                console.log("Logo failed to load, using text fallback");
+              }}
+            />
+            <div className="logo-text" style={{ display: 'none' }}>
+              <span className="logo-icon">🌾</span>
+              AgriTwin
+            </div>
           </div>
           <div className="user-info">
             <div className="user-email">
@@ -171,8 +192,19 @@ function Home() {
       <section className="hero" id="home">
         <div className="container hero-container">
           <div className="hero-text">
+            {/* Hero logo - using the same path */}
+            {!logoError && (
+              <div className="hero-logo">
+                <img 
+                  src="/textures/Final logo.png" 
+                  alt="AgriTwin" 
+                  className="hero-logo-image"
+                  onError={handleLogoError}
+                />
+              </div>
+            )}
             <h1 className="animate-text">
-              AGRICULTURE IS THE MOST HEALTHFUL
+              TWIN YOUR LAND.MULTIPLY YOUR POTENTIAL.
             </h1>
             <p>AI-powered prediction system for modern farmers</p>
             <div className="hero-buttons">
@@ -197,6 +229,15 @@ function Home() {
         <div className="container">
           <div className="section-header">
             <h2>
+              {/* Small logo in section header */}
+              {!logoError && (
+                <img 
+                  src="/textures/Final logo.png" 
+                  alt="AgriTwin" 
+                  className="section-logo"
+                  onError={handleLogoError}
+                />
+              )}
               <span className="section-icon">🌱</span>
               AgriTwin Simulation
             </h2>
@@ -243,29 +284,35 @@ function Home() {
                 />
               </div>
             </div>
-           <div className="form-item">
-  <label>Animal Attack Loss (%)</label>
-  <input
-    type="number"
-    name="animalAttack"
-    min="0"
-    max="100"
-    value={form.animalAttack || 0}
-    onChange={handleChange}
-  />
-</div>
+            
+            {/* Loss inputs in a separate row */}
+            <div className="form-grid" style={{ marginTop: '20px' }}>
+              <div className="form-item">
+                <label>Animal Attack Loss (%)</label>
+                <input
+                  type="number"
+                  name="animalAttack"
+                  min="0"
+                  max="100"
+                  value={form.animalAttack || 0}
+                  onChange={handleChange}
+                  className="number-input"
+                />
+              </div>
 
-<div className="form-item">
-  <label>Natural Disaster Loss (%)</label>
-  <input
-    type="number"
-    name="naturalDisaster"
-    min="0"
-    max="100"
-    value={form.naturalDisaster || 0}
-    onChange={handleChange}
-  />
-</div>
+              <div className="form-item">
+                <label>Natural Disaster Loss (%)</label>
+                <input
+                  type="number"
+                  name="naturalDisaster"
+                  min="0"
+                  max="100"
+                  value={form.naturalDisaster || 0}
+                  onChange={handleChange}
+                  className="number-input"
+                />
+              </div>
+            </div>
 
             <button 
               className="simulate-btn" 
@@ -332,7 +379,18 @@ function Home() {
                     </div>
 
                     <div className="farm-visualization">
-                      <h4>Farm Visualization</h4>
+                      <h4>
+                        {/* Small logo in visualization title */}
+                        {!logoError && (
+                          <img 
+                            src="/textures/Final logo.png" 
+                            alt="AgriTwin" 
+                            className="visualization-logo"
+                            onError={handleLogoError}
+                          />
+                        )}
+                        Farm Visualization
+                      </h4>
                       <Farm3D
                         crop={form.crop}
                         soilType={form.soil}
@@ -352,6 +410,14 @@ function Home() {
         <div className="container">
           <div className="section-header">
             <h2>
+              {!logoError && (
+                <img 
+                  src="/textures/Final logo.png" 
+                  alt="AgriTwin" 
+                  className="section-logo"
+                  onError={handleLogoError}
+                />
+              )}
               <span className="section-icon">🦠</span>
               Crop Disease Detection
             </h2>
@@ -441,6 +507,14 @@ function Home() {
         <div className="container">
           <div className="section-header">
             <h2>
+              {!logoError && (
+                <img 
+                  src="/textures/Final logo.png" 
+                  alt="AgriTwin" 
+                  className="section-logo"
+                  onError={handleLogoError}
+                />
+              )}
               <span className="section-icon">📞</span>
               Contact Us
             </h2>
@@ -488,7 +562,17 @@ function Home() {
         <div className="container">
           <div className="footer-content">
             <div className="footer-section">
-              <h4>AgriTwin</h4>
+              <h4>
+                {!logoError && (
+                  <img 
+                    src="/textures/Final logo.png" 
+                    alt="AgriTwin" 
+                    className="footer-logo"
+                    onError={handleLogoError}
+                  />
+                )}
+                AgriTwin
+              </h4>
               <p>Smart farming solutions for a sustainable future</p>
             </div>
             <div className="footer-section">
